@@ -1,61 +1,95 @@
 import React from "react";
-import {
-  Text,
-  View,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import Constants from "expo-constants";
-import { TextInput } from "react-native-gesture-handler";
+import { Text, View, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Todo = () => {
+const todo = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.view}>
-        <TextInput
-          placeholder="Enter Todo"
-          autoFocus={true}
-          clearTextOnFocus={true}
-          style={styles.input}
-        />
-        <TouchableOpacity style={styles.btn}>
-          <Text>Add todo</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <Text style={styles.todos}>Todos</Text>
+      <View style={styles.columnArranging}>
+        <View style={styles.flex}>
+          <Text style={styles.todo}>Perform Obligations</Text>
+          <View style={styles.btnFlex}>
+            <TouchableOpacity style={styles.updateBtn}>
+              <Text style={styles.btnText}>Update</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.delBtn}>
+              <Text style={styles.btnText}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.flex}>
+          <Text style={styles.todo}>Perform Obligations</Text>
+          <View style={styles.btnFlex}>
+            <TouchableOpacity style={styles.updateBtn}>
+              <Text style={styles.btnText}>Update</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.delBtn}>
+              <Text style={styles.btnText}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.flex}>
+          <Text style={styles.todo}>Perform Obligations</Text>
+          <View style={styles.btnFlex}>
+            <TouchableOpacity style={styles.updateBtn}>
+              <Text style={styles.btnText}>Update</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.delBtn}>
+              <Text style={styles.btnText}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
-export default Todo;
+export default todo;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Constants.statusBarHeight,
-    backgroundColor: "#ffe4d4",
-    height: "50%",
-    margin: 15,
-    borderRadius: 4,
+    marginTop: 20,
+    marginHorizontal: 20,
   },
-  view: {
-    flex: 1,
+  todos: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#5c3195",
+  },
+  flex: {
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 10,
-    marginBottom: 10,
+    marginTop: 10,
   },
-  input: {
-    borderColor: "#425195",
-    borderWidth: 3,
-    width: "70%",
-    height: "20%",
+  btnFlex: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  updateBtn: {
+    backgroundColor: "#6985f6",
+    padding: 5,
     borderRadius: 3,
-    padding: 7,
+    marginHorizontal: 3,
   },
-  btn: {
-    backgroundColor: "#425195",
-    padding: 12,
+  delBtn: {
+    backgroundColor: "#e46472",
+    padding: 5,
     borderRadius: 3,
+    marginHorizontal: 3,
   },
+  btnText: {
+    color: "#f7f7f7",
+  },
+  todo: {
+    fontSize: 15,
+    borderBottomWidth: 2,
+    width: "65%",
+    paddingBottom: 3,
+  },
+  columnArranging: {
+    flexDirection: 'column'
+  }
 });
