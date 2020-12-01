@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 import Constants from "expo-constants";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
-const Background = () => {
+const Background = ({handleTodo}) => {
+
+  let [todo,setTodo] = useState('')
+  const getText = (text) => {
+    setTodo(text)
+  }
+  const setTodoItem = () => {
+    handleTodo(todo)
+    setTodo('')
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.name}>Todo App</Text>
@@ -15,8 +24,10 @@ const Background = () => {
           clearTextOnFocus={true}
           placeholder="Enter Your Todo"
           style={styles.input}
+          onChangeText={text=>getText(text)}
+          value={todo}
         />
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={setTodoItem}>
           <Text style={styles.btnText}>Add Todo</Text>
         </TouchableOpacity>
       </View>

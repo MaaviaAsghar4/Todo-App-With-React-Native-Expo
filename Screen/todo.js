@@ -2,44 +2,33 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const todo = () => {
+const todo = ({ todoItem, deleteTodo, editTodoItem }) => {
+  const delTodo = (id) => {
+    deleteTodo(id)
+  }
+
+  const editTodo = (index) => {
+    editTodoItem(index)
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.todos}>Todos</Text>
       <View style={styles.columnArranging}>
-        <View style={styles.flex}>
-          <Text style={styles.todo}>Perform Obligations</Text>
-          <View style={styles.btnFlex}>
-            <TouchableOpacity style={styles.updateBtn}>
-              <Text style={styles.btnText}>Update</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.delBtn}>
-              <Text style={styles.btnText}>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.flex}>
-          <Text style={styles.todo}>Perform Obligations</Text>
-          <View style={styles.btnFlex}>
-            <TouchableOpacity style={styles.updateBtn}>
-              <Text style={styles.btnText}>Update</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.delBtn}>
-              <Text style={styles.btnText}>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.flex}>
-          <Text style={styles.todo}>Perform Obligations</Text>
-          <View style={styles.btnFlex}>
-            <TouchableOpacity style={styles.updateBtn}>
-              <Text style={styles.btnText}>Update</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.delBtn}>
-              <Text style={styles.btnText}>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        {todoItem && todoItem.map((todo,i) => {
+          return (
+            <View style={styles.flex} key={todo.id}>
+              <Text style={todo.edit ? styles.complete: styles.todo}>{i+1} - {todo.todo}</Text>
+              <View style={styles.btnFlex}>
+                <TouchableOpacity onPress={()=>editTodo(i)} style={styles.updateBtn}>
+                  <Text style={styles.btnText}>Done</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>delTodo(todo.id)} style={styles.delBtn}>
+                  <Text style={styles.btnText}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          );
+        })}
       </View>
     </View>
   );
@@ -62,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 10,
+    marginTop: 20,
   },
   btnFlex: {
     flexDirection: "row",
@@ -89,7 +78,15 @@ const styles = StyleSheet.create({
     width: "65%",
     paddingBottom: 3,
   },
+  complete: {
+    fontSize: 15,
+    borderBottomWidth: 2,
+    width: "65%",
+    paddingBottom: 3,
+    opacity: 0.5,
+    textDecorationLine: 'line-through',
+  },
   columnArranging: {
-    flexDirection: 'column'
-  }
+    flexDirection: "column",
+  },
 });
